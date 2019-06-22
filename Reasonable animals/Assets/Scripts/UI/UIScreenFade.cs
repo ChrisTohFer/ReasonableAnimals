@@ -32,12 +32,15 @@ public class UIScreenFade : MonoBehaviour
             ScreenCover.color = c;
             yield return new WaitForEndOfFrame();
         }
+        ScreenCover.gameObject.SetActive(false);
 
         FadeInCompleted.Invoke();
     }
 
     IEnumerator CFadeOut()
     {
+        ScreenCover.gameObject.SetActive(true);
+
         while (ScreenCover.color.a < 1f)
         {
             Color c = ScreenCover.color;

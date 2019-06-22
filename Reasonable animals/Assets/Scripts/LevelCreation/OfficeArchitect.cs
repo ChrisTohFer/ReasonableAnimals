@@ -24,6 +24,9 @@ public class OfficeArchitect : MonoBehaviour
     public float CameraAngle = 35f;
     public float CameraBaseHeight = 4;
 
+    //
+    public GameObject WorkerPrefab;
+
     //Static variables
 
     public static OfficeArchitect Singleton;
@@ -120,6 +123,14 @@ public class OfficeArchitect : MonoBehaviour
                 if (levelObject != null)
                 {
                     levelObject.transform.position = position;
+                    Desk desk = levelObject.GetComponent<Desk>();
+                    if (desk != null)
+                    {
+                        levelObject.transform.rotation = Quaternion.Euler(0f, Random.Range(160f, 200f), 0f);
+                        GameObject workerObject = Instantiate(WorkerPrefab, desk.WorkLocation.transform.position, Quaternion.identity);
+                        Worker worker = workerObject.GetComponent<Worker>();
+                        worker.OwnDesk = desk;
+                    }
                 }
 
                 Instantiate(GetRandomPiece(FloorPiecePrefabs), position, Quaternion.identity);

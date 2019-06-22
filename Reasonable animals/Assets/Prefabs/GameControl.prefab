@@ -50,12 +50,16 @@ MonoBehaviour:
   - {fileID: 3554466385733729391, guid: 89ed4c838d86cfe40b2560a962c09dc8, type: 3}
   DeskPiecePrefabs:
   - {fileID: 1411784194046870516, guid: 554389464aea99e4b829fe0e9553d8b7, type: 3}
+  - {fileID: 3147070406376448455, guid: dd669796ccda10140ac5d1733b5455ba, type: 3}
+  - {fileID: 8266515352459163502, guid: 01a21e83de265f34093930d0f6864b54, type: 3}
   WaterCoolePiecePrefabs:
   - {fileID: 8115338750745018726, guid: 12ff41f4810876c4198993e4bf7e774f, type: 3}
   PieceWidth: 7.1
   PieceLength: 7.1
   CameraAngle: 35
   CameraBaseHeight: 4
+  WorkerPrefab: {fileID: 1739480531092951911, guid: be34ebfbb01bcb44b9e51a63810a6fa2,
+    type: 3}
 --- !u!114 &2698223619141497600
 MonoBehaviour:
   m_ObjectHideFlags: 0
