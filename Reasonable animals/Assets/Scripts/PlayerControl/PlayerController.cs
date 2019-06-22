@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
 
     void CameraControl()
     {
+        //Get player input as vector
         Vector3 CameraVelocity = Vector3.zero;
-
         if (Input.GetKey(KeyCode.A))
         {
             CameraVelocity += Vector3.left;
@@ -32,8 +32,9 @@ public class PlayerController : MonoBehaviour
             CameraVelocity += Vector3.back;
         }
 
+        //Apply offset to camera and text if new position is within bounds
         Transform camTrans = Camera.main.transform;
-        Vector3 offset = camTrans.position.y / Mathf.Sin(camTrans.rotation.eulerAngles.x) * Vector3.forward;
+        Vector3 offset = Utils.GetCameraZOffset(Camera.main) * Vector3.forward;
         Vector3 camFocus = camTrans.position - offset;
         
         camFocus = camFocus + CameraVelocity * camTrans.position.y * 0.4f * CameraSpeed * Time.deltaTime;
@@ -48,15 +49,14 @@ public class PlayerController : MonoBehaviour
         }
         if (camFocus.z < OfficeArchitect.CornerBL.y)
         {
-            Debug.Log("Bracket1");
             camFocus.z = OfficeArchitect.CornerBL.y;
         }
         else if (camFocus.z > OfficeArchitect.CornerTR.y)
         {
-            Debug.Log("Bracket2");
             camFocus.z = OfficeArchitect.CornerTR.y;
         }
 
+        //Set new camera position
         camTrans.position = camFocus + offset;
     }
 

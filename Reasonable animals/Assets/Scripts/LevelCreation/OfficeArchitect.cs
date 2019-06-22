@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Object of this class placed in scene will place all the level components appropriately to generate a level
 
@@ -26,10 +27,10 @@ public class OfficeArchitect : MonoBehaviour
     //Static variables
 
     public static OfficeArchitect Singleton;
-    public static int OfficeWidth = 10;
-    public static int OfficeLength = 6;
+    public static int OfficeWidth = 3;
+    public static int OfficeLength = 2;
     public static float DeskProportion = 0.8f; //How many floor segments are occupied by desks (as opposed to Water coolers etc)
-    public static float WaterCoolerProportion = 0.2f;
+    public static float WaterCoolerProportion = 0.3f;
 
     //Return office dimensions
     public static Vector2 Dimensions
@@ -101,7 +102,7 @@ public class OfficeArchitect : MonoBehaviour
         {
             levelObjects[i] = Instantiate(GetRandomPiece(DeskPiecePrefabs));
         }
-        for(int i = 0; i < numberOfWaterCoolers && i < levelObjects.Length; ++i)
+        for(int i = numberOfDesks; i < numberOfWaterCoolers + numberOfDesks && i < levelObjects.Length; ++i)
         {
             levelObjects[i] = Instantiate(GetRandomPiece(WaterCoolePiecePrefabs));
         }
@@ -113,7 +114,7 @@ public class OfficeArchitect : MonoBehaviour
             Vector3 position = Vector3.zero;
             for(int i = 0; i < OfficeLength; ++i)
             {
-                int objectIndex = i * OfficeWidth + j;
+                int objectIndex = j * OfficeLength + i;
                 position = new Vector3(j * PieceWidth, 0f, i * PieceLength);
                 GameObject levelObject = levelObjects[objectIndex];
                 if (levelObject != null)
@@ -149,6 +150,14 @@ public class OfficeArchitect : MonoBehaviour
         //
         c.transform.position = new Vector3((OfficeWidth - 1) * PieceWidth / 2f, height, (OfficeLength - 1) * PieceLength / 2f - offset);
         c.transform.rotation = Quaternion.Euler(90f - CameraAngle, 0f, 0f);
+    }
+
+    //Load next level
+    public void LoadNextLevel()
+    {
+        OfficeWidth = Mathf.CeilToInt(OfficeWidth * 1.1f);
+        OfficeLength = Mathf.CeilToInt(OfficeLength* 1.1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     //Unity Callbacks

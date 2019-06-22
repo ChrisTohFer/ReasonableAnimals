@@ -1,0 +1,36 @@
+newmtl wall_vthree_RA:aiStandardSurface2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 0.00
+newmtl wall_vthree_RA:aiStandardSurface4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 0.00
+newmtl wall_vthree_RA:lambert3SG
+illum 4
+Kd 0.53 0.98 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl wall_vthree_RA:lambert5SG
+illum 4
+Kd 1.00 1.00 0.13
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl wall_vthree_RA:lambert6SG
+illum 4
+Kd 0.14 0.84 0.14
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl wall_vthree_RA:lambert7SG
+illum 4
+Kd 1.00 0.30 0.84
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
