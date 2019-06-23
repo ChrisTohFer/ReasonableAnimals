@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class UIScreenFade : MonoBehaviour
 {
+    public static UIScreenFade Singleton;
+
     //Properties
     public float FadeInDelay = 1f;
     public float FadeInDuration = 2f;
@@ -20,6 +22,11 @@ public class UIScreenFade : MonoBehaviour
 
 
     //Fade methods
+
+    public void FadeOut()
+    {
+        StartCoroutine(CFadeOut());
+    }
 
     IEnumerator CFadeIn(float Delay)
     {
@@ -53,8 +60,9 @@ public class UIScreenFade : MonoBehaviour
     }
 
     //Unity Callbacks
-    void Start()
+    void Awake()
     {
+        Singleton = this;
         StartCoroutine(CFadeIn(FadeInDelay));
     }
     private void Update()

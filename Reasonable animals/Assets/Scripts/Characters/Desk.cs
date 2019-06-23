@@ -10,6 +10,7 @@ public class Desk : MonoBehaviour
     //
     public GameObject WorkLocation;
     public GameObject FocusLocation;
+    public OscillatingLight LightRef;
 
 
     //Unity callbacks

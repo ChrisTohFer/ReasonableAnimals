@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8017100272882593626}
   - component: {fileID: 4048173757037687507}
-  - component: {fileID: 5357194256349734764}
+  - component: {fileID: 3060251072978251594}
   m_Layer: 0
   m_Name: Worker
   m_TagString: Untagged
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74c70df7195d2b43a2f6cde63564d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Workers: []
   OwnDesk: {fileID: 0}
   Cooler: {fileID: 0}
   MinWorkTime: 5
@@ -54,8 +53,8 @@ MonoBehaviour:
   DeskStopDistance: 0.2
   CoolerStopDistance: 3
   TalkTime: 10
---- !u!136 &5357194256349734764
-CapsuleCollider:
+--- !u!135 &3060251072978251594
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -64,9 +63,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3711657925769255799
 GameObject:

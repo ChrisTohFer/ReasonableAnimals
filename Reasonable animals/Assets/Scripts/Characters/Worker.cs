@@ -13,7 +13,38 @@ public class Worker : MonoBehaviour
     }
 
     //Static
-    public List<Worker> Workers;
+    static public List<Worker> Workers;
+    public static int NumberAtWork
+    {
+        get
+        {
+            if(Workers == null)
+            {
+                Workers = new List<Worker>();
+            }
+            int n = 0;
+            foreach(Worker w in Workers)
+            {
+                if (w.AtDesk)
+                    ++n;
+            }
+
+            return n;
+        }
+    }
+    public static float WorkProportion
+    {
+        get
+        {
+            if(Workers.Count == 0)
+            {
+                return 0f;
+            }
+            else
+                return (float)NumberAtWork / Workers.Count;
+        }
+    }
+    public static Worker CurrentlyHeld = null;
 
     //References
     public Desk OwnDesk;
@@ -40,6 +71,7 @@ public class Worker : MonoBehaviour
 
     void ReturnToDesk()
     {
+        AtCooler = false;
         if (Cooler != null)
         {
             Cooler.RemoveWorker(this);
@@ -50,6 +82,7 @@ public class Worker : MonoBehaviour
     }
     void GoToWaterCooler(Watercooler wc)
     {
+        AtDesk = false;
         if (Cooler != null)
         {
             Cooler.RemoveWorker(this);
@@ -95,22 +128,32 @@ public class Worker : MonoBehaviour
         }
     }
 
+
     void PickUp()
     {
         PickedUp = true;
+        OwnDesk.LightRef.EnableLight(true);
+        CurrentlyHeld = this;
+        AtDesk = false;
+        AtCooler = false;
     }
     void Drop()
     {
         PickedUp = false;
         transform.position = MouseWorldLocation(0f);
-        if (Vector3.Distance(transform.position, OwnDesk.WorkLocation.transform.position) < 3f)
+        OwnDesk.LightRef.EnableLight(false);
+
+        Watercooler nearbyCooler = GetNearestCooler();
+        if (Vector3.Distance(transform.position, OwnDesk.WorkLocation.transform.position) <
+            Vector3.Distance(transform.position, nearbyCooler.transform.position))
         {
             ReturnToDesk();
         }
         else
         {
-            GoToWaterCooler(GetNearestCooler());
+            GoToWaterCooler(nearbyCooler);
         }
+        CurrentlyHeld = null;
     }
 
     Vector3 MouseWorldLocation(float height)

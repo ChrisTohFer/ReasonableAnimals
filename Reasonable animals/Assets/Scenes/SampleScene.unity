@@ -650,5 +650,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1534902319247087333, guid: edc6435e1ff0f874e98f15d861cd3639,
+        type: 3}
+      propertyPath: ScreenFader
+      value: 
+      objectReference: {fileID: 626328223}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edc6435e1ff0f874e98f15d861cd3639, type: 3}

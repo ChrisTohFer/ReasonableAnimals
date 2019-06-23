@@ -161,6 +161,8 @@ public class OfficeArchitect : MonoBehaviour
         //
         c.transform.position = new Vector3((OfficeWidth - 1) * PieceWidth / 2f, height, (OfficeLength - 1) * PieceLength / 2f - offset);
         c.transform.rotation = Quaternion.Euler(90f - CameraAngle, 0f, 0f);
+
+        SharesTracker.Singleton.StartTracking();
     }
 
     //Load next level
