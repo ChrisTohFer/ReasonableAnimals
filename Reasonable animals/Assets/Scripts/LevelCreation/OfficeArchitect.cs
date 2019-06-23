@@ -27,6 +27,10 @@ public class OfficeArchitect : MonoBehaviour
     //
     public GameObject[] WorkerPrefabs;
 
+    //
+    public int OfficeWidthOverride = 0;
+    public int OfficeLengthOverride = 0;
+
     //Static variables
 
     public static OfficeArchitect Singleton;
@@ -94,8 +98,22 @@ public class OfficeArchitect : MonoBehaviour
     //Generate level from the chosen static parameters
     void GenerateLevel()
     {
+        bool overriden = false;
+        if (OfficeWidthOverride == 0)
+        {
+            OfficeWidthOverride = OfficeWidth;
+        }
+        else
+            overriden = true;
+        if (OfficeLengthOverride == 0)
+        {
+            OfficeLengthOverride = OfficeLength;
+        }
+        else
+            overriden = true;
+
         //Calculate number of each piece required
-        int floorSpaces = OfficeWidth * OfficeLength;
+        int floorSpaces = OfficeWidthOverride * OfficeLengthOverride;
         GameObject[] levelObjects = new GameObject[floorSpaces];
         int numberOfDesks = Mathf.RoundToInt(DeskProportion * floorSpaces);
         int numberOfWaterCoolers = Mathf.RoundToInt(WaterCoolerProportion * floorSpaces);
@@ -112,12 +130,12 @@ public class OfficeArchitect : MonoBehaviour
         ShuffleArray(levelObjects);
 
         //Place the pieces in the correct locations
-        for(int j = 0; j < OfficeWidth; ++j)
+        for(int j = 0; j < OfficeWidthOverride; ++j)
         {
             Vector3 position = Vector3.zero;
-            for(int i = 0; i < OfficeLength; ++i)
+            for(int i = 0; i < OfficeLengthOverride; ++i)
             {
-                int objectIndex = j * OfficeLength + i;
+                int objectIndex = j * OfficeLengthOverride + i;
                 position = new Vector3(j * PieceWidth, 0f, i * PieceLength);
                 GameObject levelObject = levelObjects[objectIndex];
                 if (levelObject != null)
@@ -138,7 +156,7 @@ public class OfficeArchitect : MonoBehaviour
                 {
                     Instantiate(GetRandomPiece(WallPiecePrefabs), position, Quaternion.Euler(new Vector3(0f, -90f, 0f)));
                 }
-                else if(j == OfficeWidth - 1)
+                else if(j == OfficeWidthOverride - 1)
                 {
                     Instantiate(GetRandomPiece(WallPiecePrefabs), position, Quaternion.Euler(new Vector3(0f, 90f, 0f)));
                 }
@@ -159,10 +177,14 @@ public class OfficeArchitect : MonoBehaviour
         float offset = height * Mathf.Sin(CameraAngle);
 
         //
-        c.transform.position = new Vector3((OfficeWidth - 1) * PieceWidth / 2f, height, (OfficeLength - 1) * PieceLength / 2f - offset);
-        c.transform.rotation = Quaternion.Euler(90f - CameraAngle, 0f, 0f);
+        if(!overriden)
+        {
+            c.transform.position = new Vector3((OfficeWidth - 1) * PieceWidth / 2f, height, (OfficeLength - 1) * PieceLength / 2f - offset);
+            c.transform.rotation = Quaternion.Euler(90f - CameraAngle, 0f, 0f);
+        }
 
-        SharesTracker.Singleton.StartTracking();
+        if (SharesTracker.Singleton != null)
+            SharesTracker.Singleton.StartTracking();
     }
 
     //Load next level

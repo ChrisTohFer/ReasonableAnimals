@@ -58,6 +58,9 @@ public class Worker : MonoBehaviour
     public float CoolerStopDistance = 3f;
     public float TalkTime = 10f;
 
+    public AudioSource AngryMeow;
+    public AudioSource Complaining;
+    public Animator AnimatorRef;
     //
     bool AtDesk = true;
     bool AtCooler = false;
@@ -79,6 +82,8 @@ public class Worker : MonoBehaviour
         MoveTarget = OwnDesk.WorkLocation.transform.position;
         MoveInterest = PointOfInterest.DESK;
         Interest = Random.Range(MinWorkTime, MaxWorkTime);
+
+        AnimatorRef.SetBool("Moving", true);
     }
     void GoToWaterCooler(Watercooler wc)
     {
@@ -92,6 +97,7 @@ public class Worker : MonoBehaviour
         MoveTarget = wc.transform.position;
 
         Interest = TalkTime;
+        AnimatorRef.SetBool("Moving", true);
     }
     //Returns the closest water cooler
     Watercooler GetNearestCooler()
@@ -136,6 +142,11 @@ public class Worker : MonoBehaviour
         CurrentlyHeld = this;
         AtDesk = false;
         AtCooler = false;
+
+        Complaining.Play();
+        Complaining.time = 1f;
+        AngryMeow.Play();
+        AnimatorRef.SetBool("Moving", true);
     }
     void Drop()
     {
@@ -154,6 +165,8 @@ public class Worker : MonoBehaviour
             GoToWaterCooler(nearbyCooler);
         }
         CurrentlyHeld = null;
+
+        Complaining.Stop();
     }
 
     Vector3 MouseWorldLocation(float height)
@@ -181,7 +194,7 @@ public class Worker : MonoBehaviour
         Workers.Add(this);
 
         AtDesk = true;
-        Interest = Random.Range(0f, MaxWorkTime);
+        Interest = Random.Range(-TalkTime, MaxWorkTime);
 
         MoveTarget = transform.position;
     }
@@ -216,6 +229,7 @@ public class Worker : MonoBehaviour
             {
                 AtDesk = true;
                 transform.LookAt(OwnDesk.FocusLocation.transform);
+                AnimatorRef.SetBool("Moving", false);
 
                 if (Interest <= 0f)
                 {
@@ -243,6 +257,7 @@ public class Worker : MonoBehaviour
 
                 }
                 transform.LookAt(Cooler.ConversationPosition);
+                AnimatorRef.SetBool("Moving", false);
 
                 if (Interest <= 0f)
                 {

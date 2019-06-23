@@ -36,7 +36,7 @@ public class UIScreenFade : MonoBehaviour
         while (ScreenCover.color.a > 0f)
         {
             Color c = ScreenCover.color;
-            c.a -= FadeOutDuration * Time.deltaTime / FadeInDuration;
+            c.a -= Time.deltaTime / FadeInDuration;
             ScreenCover.color = c;
             yield return new WaitForEndOfFrame();
         }
@@ -52,7 +52,7 @@ public class UIScreenFade : MonoBehaviour
         while (ScreenCover.color.a < 1f)
         {
             Color c = ScreenCover.color;
-            c.a += FadeInDuration * Time.deltaTime / FadeOutDuration;
+            c.a += Time.deltaTime / FadeOutDuration;
             ScreenCover.color = c;
             yield return new WaitForEndOfFrame();
         }

@@ -17,16 +17,24 @@ public class SharesTracker : MonoBehaviour
 
     //
     bool tracking = false;
-    float currentValue;
-    float target;
+    public float CurrentMoney;
+    public float Target;
+
+    public AudioSource LevelComplete;
+
+    bool levelover = false;
 
     //Method
 
     public void StartTracking()
     {
         tracking = true;
-        currentValue = StartingValuePerWorker * Mathf.Pow(Worker.Workers.Count, 0.9f);
-        target = TargetPerWorker * Mathf.Pow(Worker.Workers.Count, 0.9f);
+        CurrentMoney = StartingValuePerWorker * Mathf.Pow(Worker.Workers.Count, 0.9f);
+        Target = TargetPerWorker * Mathf.Pow(Worker.Workers.Count, 0.9f);
+    }
+    public void ReturnToMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
 
     //UnityCallbacks
@@ -40,15 +48,14 @@ public class SharesTracker : MonoBehaviour
         if(tracking)
         {
             int nWorking = Worker.NumberAtWork;
-            currentValue += WorkerRevenue * nWorking * Time.fixedDeltaTime;
-            currentValue -= WorkerUpkeep * Worker.Workers.Count * Time.fixedDeltaTime;
+            CurrentMoney += WorkerRevenue * nWorking * Time.fixedDeltaTime;
+            CurrentMoney -= WorkerUpkeep * Worker.Workers.Count * Time.fixedDeltaTime;
 
-            Debug.Log(currentValue + ", " + TargetPerWorker * Worker.Workers.Count);
-
-            if(currentValue > target)
+            if(CurrentMoney > Target && !levelover)
             {
-                Debug.Log("Value reached");
                 UIScreenFade.Singleton.FadeOut();
+                LevelComplete.Play();
+                levelover = true;
             }
         }
     }

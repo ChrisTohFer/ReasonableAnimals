@@ -64,6 +64,13 @@ MonoBehaviour:
   CameraBaseHeight: 6
   WorkerPrefabs:
   - {fileID: 1739480531092951911, guid: be34ebfbb01bcb44b9e51a63810a6fa2, type: 3}
+  - {fileID: 1739480531092951911, guid: 70f975c2d9dce874198b6c75bd0c363c, type: 3}
+  - {fileID: 1739480531092951911, guid: 537198e5d26d7f2439983b073222a2a7, type: 3}
+  - {fileID: 1739480531092951911, guid: 6f7082c86707d954793e5b427561e886, type: 3}
+  - {fileID: 1739480531092951911, guid: e68ac8008a7f144458800271bc31b871, type: 3}
+  - {fileID: 1739480531092951911, guid: 62a34d37eb60a8f40b7b4c8b258b5184, type: 3}
+  OfficeWidthOverride: 0
+  OfficeLengthOverride: 0
 --- !u!114 &2698223619141497600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,3 +101,6 @@ MonoBehaviour:
   WorkerUpkeep: 0.35
   WorkerRevenue: 0.8
   BoundaryPowerScaling: 0.9
+  CurrentMoney: 0
+  Target: 0
+  LevelComplete: {fileID: 0}

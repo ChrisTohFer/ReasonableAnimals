@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae15713289b3f434db3f01d0a17d704a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChatSource: {fileID: 0}
+  VolumePerWorker: 0.3
+  MaxVolume: 2
 --- !u!1001 &9159415618941143927
 PrefabInstance:
   m_ObjectHideFlags: 0
