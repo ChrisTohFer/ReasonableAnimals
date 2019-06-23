@@ -61,9 +61,9 @@ MonoBehaviour:
   PieceWidth: 7.1
   PieceLength: 7.1
   CameraAngle: 35
-  CameraBaseHeight: 4
-  WorkerPrefab: {fileID: 1739480531092951911, guid: be34ebfbb01bcb44b9e51a63810a6fa2,
-    type: 3}
+  CameraBaseHeight: 6
+  WorkerPrefabs:
+  - {fileID: 1739480531092951911, guid: be34ebfbb01bcb44b9e51a63810a6fa2, type: 3}
 --- !u!114 &2698223619141497600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,5 +91,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingValuePerWorker: 1.5
   TargetPerWorker: 5
-  WorkerUpkeep: 0.2
-  WorkerRevenue: 0.5
+  WorkerUpkeep: 0.35
+  WorkerRevenue: 0.8
+  BoundaryPowerScaling: 0.9

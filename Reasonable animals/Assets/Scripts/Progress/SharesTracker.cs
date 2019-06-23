@@ -11,19 +11,22 @@ public class SharesTracker : MonoBehaviour
 
     public float StartingValuePerWorker = 1.5f;
     public float TargetPerWorker = 5f;
-    public float WorkerUpkeep = .20f;
-    public float WorkerRevenue = .5f;
+    public float WorkerUpkeep = .35f;
+    public float WorkerRevenue = .8f;
+    public float BoundaryPowerScaling = 0.9f;
 
     //
     bool tracking = false;
     float currentValue;
+    float target;
 
     //Method
 
     public void StartTracking()
     {
         tracking = true;
-        currentValue = StartingValuePerWorker * Worker.Workers.Count;
+        currentValue = StartingValuePerWorker * Mathf.Pow(Worker.Workers.Count, 0.9f);
+        target = TargetPerWorker * Mathf.Pow(Worker.Workers.Count, 0.9f);
     }
 
     //UnityCallbacks
@@ -42,7 +45,7 @@ public class SharesTracker : MonoBehaviour
 
             Debug.Log(currentValue + ", " + TargetPerWorker * Worker.Workers.Count);
 
-            if(currentValue > TargetPerWorker * Worker.Workers.Count)
+            if(currentValue > target)
             {
                 Debug.Log("Value reached");
                 UIScreenFade.Singleton.FadeOut();

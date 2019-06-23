@@ -25,6 +25,7 @@ public class UIScreenFade : MonoBehaviour
 
     public void FadeOut()
     {
+        StopAllCoroutines();
         StartCoroutine(CFadeOut());
     }
 
@@ -69,7 +70,7 @@ public class UIScreenFade : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(CFadeOut());
+            FadeOut();
         }
     }
 

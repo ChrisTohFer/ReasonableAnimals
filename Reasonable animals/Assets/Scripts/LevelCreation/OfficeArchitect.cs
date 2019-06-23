@@ -25,7 +25,7 @@ public class OfficeArchitect : MonoBehaviour
     public float CameraBaseHeight = 4;
 
     //
-    public GameObject WorkerPrefab;
+    public GameObject[] WorkerPrefabs;
 
     //Static variables
 
@@ -127,7 +127,7 @@ public class OfficeArchitect : MonoBehaviour
                     if (desk != null)
                     {
                         levelObject.transform.rotation = Quaternion.Euler(0f, Random.Range(160f, 200f), 0f);
-                        GameObject workerObject = Instantiate(WorkerPrefab, desk.WorkLocation.transform.position, Quaternion.identity);
+                        GameObject workerObject = Instantiate(GetRandomPiece(WorkerPrefabs), desk.WorkLocation.transform.position, Quaternion.identity);
                         Worker worker = workerObject.GetComponent<Worker>();
                         worker.OwnDesk = desk;
                     }
@@ -168,8 +168,8 @@ public class OfficeArchitect : MonoBehaviour
     //Load next level
     public void LoadNextLevel()
     {
-        OfficeWidth = Mathf.CeilToInt(OfficeWidth * 1.1f);
-        OfficeLength = Mathf.CeilToInt(OfficeLength* 1.1f);
+        ++OfficeWidth;
+        ++OfficeLength;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

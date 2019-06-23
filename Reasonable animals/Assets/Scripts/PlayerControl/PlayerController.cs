@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 
     public float CameraSpeed = 5f; // PerSecond
 
+    //
+    int CurrentCooler = 0;
+
     //Camera movement
 
     void CameraControl()
@@ -59,13 +62,37 @@ public class PlayerController : MonoBehaviour
         //Set new camera position
         camTrans.position = camFocus + offset;
     }
-
+    void SetCameraPosition(Vector3 WorldPoint)
+    {
+        Transform camTrans = Camera.main.transform;
+        Vector3 offset = Utils.GetCameraZOffset(Camera.main) * Vector3.forward;
+        camTrans.position = new Vector3(WorldPoint.x, camTrans.position.y, WorldPoint.z) + offset;
+    }
+    void CameraJump()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(Worker.CurrentlyHeld != null)
+            {
+                SetCameraPosition(Worker.CurrentlyHeld.OwnDesk.transform.position);
+            }
+            else
+            {
+                if(CurrentCooler >= Watercooler.coolers.Count)
+                {
+                    CurrentCooler = 0;
+                }
+                SetCameraPosition(Watercooler.coolers[CurrentCooler++].transform.position);
+            }
+        }
+    }
 
     //Unity Callbacks
 
     private void Update()
     {
         CameraControl();
+        CameraJump();
     }
 
 }
