@@ -31,6 +31,9 @@ public class OfficeArchitect : MonoBehaviour
     public int OfficeWidthOverride = 0;
     public int OfficeLengthOverride = 0;
 
+    //
+    public GameObject SideWallPrefab;
+
     //Static variables
 
     public static OfficeArchitect Singleton;
@@ -154,11 +157,11 @@ public class OfficeArchitect : MonoBehaviour
                 Instantiate(GetRandomPiece(FloorPiecePrefabs), position, Quaternion.identity);
                 if (j == 0)
                 {
-                    Instantiate(GetRandomPiece(WallPiecePrefabs), position, Quaternion.Euler(new Vector3(0f, -90f, 0f)));
+                    Instantiate(SideWallPrefab, position, Quaternion.Euler(new Vector3(0f, -90f, 0f)));
                 }
                 else if(j == OfficeWidthOverride - 1)
                 {
-                    Instantiate(GetRandomPiece(WallPiecePrefabs), position, Quaternion.Euler(new Vector3(0f, 90f, 0f)));
+                    Instantiate(SideWallPrefab, position, Quaternion.Euler(new Vector3(0f, 90f, 0f)));
                 }
             }
 

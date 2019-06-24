@@ -71,6 +71,8 @@ MonoBehaviour:
   - {fileID: 1739480531092951911, guid: 62a34d37eb60a8f40b7b4c8b258b5184, type: 3}
   OfficeWidthOverride: 0
   OfficeLengthOverride: 0
+  SideWallPrefab: {fileID: 2662124466094494, guid: d6a67e451da770b4e8709ecd51958ab2,
+    type: 3}
 --- !u!114 &2698223619141497600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,3 +106,4 @@ MonoBehaviour:
   CurrentMoney: 0
   Target: 0
   LevelComplete: {fileID: 0}
+  LevelFailed: {fileID: 0}
