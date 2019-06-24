@@ -147,6 +147,8 @@ public class Worker : MonoBehaviour
         Complaining.time = 1f;
         AngryMeow.Play();
         AnimatorRef.SetBool("Moving", true);
+
+        UICursorManager.SetCursorPickup();
     }
     void Drop()
     {
@@ -167,6 +169,8 @@ public class Worker : MonoBehaviour
         CurrentlyHeld = null;
 
         Complaining.Stop();
+
+        UICursorManager.SetCursorHover();
     }
 
     //Unity callbacks
