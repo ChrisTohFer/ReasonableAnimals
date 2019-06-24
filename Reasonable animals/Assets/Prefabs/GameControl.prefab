@@ -58,6 +58,8 @@ MonoBehaviour:
   - {fileID: 7130034938083142459, guid: cfea740c2d3b4c2429cc3b7ed88d880b, type: 3}
   - {fileID: 5220969885188295184, guid: e3063948da50cd8479a175a8cda189c2, type: 3}
   - {fileID: 3115991949998850782, guid: 46adbbb16083841489d8a5465a4937b7, type: 3}
+  - {fileID: 8115338750745018726, guid: 12ff41f4810876c4198993e4bf7e774f, type: 3}
+  - {fileID: 8115338750745018726, guid: 12ff41f4810876c4198993e4bf7e774f, type: 3}
   PieceWidth: 7.1
   PieceLength: 7.1
   CameraAngle: 35

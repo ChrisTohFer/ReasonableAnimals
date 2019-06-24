@@ -44,6 +44,15 @@ public class Watercooler : MonoBehaviour
         Audience.Remove(w);
         //SetVolume();
     }
+    public int NumberOfWorkers()
+    {
+        if (Audience != null)
+        {
+            return Audience.Count;
+        }
+        else
+            return 0;
+    }
     /*public void SetVolume()
     {
         if (Audience == null)

@@ -151,7 +151,7 @@ public class Worker : MonoBehaviour
     void Drop()
     {
         PickedUp = false;
-        transform.position = MouseWorldLocation(0f);
+        transform.position = Utils.MouseWorldPosition(0f);
         OwnDesk.LightRef.EnableLight(false);
 
         Watercooler nearbyCooler = GetNearestCooler();
@@ -167,19 +167,6 @@ public class Worker : MonoBehaviour
         CurrentlyHeld = null;
 
         Complaining.Stop();
-    }
-
-    Vector3 MouseWorldLocation(float height)
-    {
-        Plane plane = new Plane(Vector3.up, Vector3.up * height);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float distance;
-        if (plane.Raycast(ray, out distance))
-        {
-            return ray.GetPoint(distance);
-        }
-        else
-            return Vector3.zero;
     }
 
     //Unity callbacks
@@ -214,7 +201,7 @@ public class Worker : MonoBehaviour
             }
             else
             {
-                transform.position = MouseWorldLocation(4f) - Vector3.up * 2f;
+                transform.position = Utils.MouseWorldPosition(4f) - Vector3.up * 2f;
             }
         }
         else

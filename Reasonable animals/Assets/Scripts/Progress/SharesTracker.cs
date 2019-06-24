@@ -60,6 +60,7 @@ public class SharesTracker : MonoBehaviour
             }
             if(CurrentMoney < 0f && !levelover)
             {
+                GameOver.Singleton.LevelLost();
                 levelover = true;
             }
         }

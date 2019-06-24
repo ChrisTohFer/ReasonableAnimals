@@ -44,9 +44,9 @@ public class MusicPlayer : MonoBehaviour
             MusicIntro.Stop();
     }
 
-    public static void FadeOut()
+    public static void FadeOut(float duration)
     {
-        Singleton.StartCoroutine(Singleton.CFadeOut(4f));
+        Singleton.StartCoroutine(Singleton.CFadeOut(duration));
     }
     IEnumerator CFadeOut(float Duration)
     {
