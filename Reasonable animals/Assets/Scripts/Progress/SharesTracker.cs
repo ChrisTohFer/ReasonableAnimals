@@ -21,6 +21,7 @@ public class SharesTracker : MonoBehaviour
     public float Target;
 
     public AudioSource LevelComplete;
+    public AudioSource LevelFailed;
 
     bool levelover = false;
 
@@ -45,7 +46,7 @@ public class SharesTracker : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(tracking)
+        if(tracking && !levelover)
         {
             int nWorking = Worker.NumberAtWork;
             CurrentMoney += WorkerRevenue * nWorking * Time.fixedDeltaTime;
@@ -55,6 +56,10 @@ public class SharesTracker : MonoBehaviour
             {
                 UIScreenFade.Singleton.FadeOut();
                 LevelComplete.Play();
+                levelover = true;
+            }
+            if(CurrentMoney < 0f && !levelover)
+            {
                 levelover = true;
             }
         }

@@ -14,12 +14,12 @@ public class MusicPlayer : MonoBehaviour
 
     void Awake()
     {
-        if(Singleton == null)
+        if (Singleton == null)
         {
             Singleton = this;
             DontDestroyOnLoad(this);
         }
-        else if(Singleton.MusicName == MusicName)
+        else if (Singleton.MusicName == MusicName)
         {
             Destroy(this);
         }
@@ -30,7 +30,7 @@ public class MusicPlayer : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
-    
+
     private void FixedUpdate()
     {
         if (Singleton == this && !MusicSource.isPlaying && (MusicIntro == null || !MusicIntro.isPlaying))
@@ -42,5 +42,18 @@ public class MusicPlayer : MonoBehaviour
         MusicSource.Stop();
         if (MusicIntro != null)
             MusicIntro.Stop();
+    }
+
+    public static void FadeOut()
+    {
+        Singleton.StartCoroutine(Singleton.CFadeOut(4f));
+    }
+    IEnumerator CFadeOut(float Duration)
+    {
+        while(MusicSource.volume > 0f)
+        {
+            MusicSource.volume -= Time.deltaTime / Duration;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
